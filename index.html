@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Gradient Generator | Free Online Gradient Tool</title>
+  <meta name="description" content="Create stunning CSS gradients online. Export as PNG, JPG, SVG, copy CSS, generate random gradients, save favorites. Free & SEO-friendly gradient generator." />
+  <meta name="robots" content="index,follow" />
+  <meta name="keywords" content="css gradient, gradient generator, css gradient generator, background gradient, linear gradient, css tools, web design tools" />
+  <meta name="author" content="Zayyan Sense Tech" />
+
+  <style>
+    :root{
+      --bg:#111; --card:#1f1f1f; --text:#fff; --accent:#2575fc;
+      --muted: rgba(255,255,255,0.78);
+      --radius:12px; --shadow:0 12px 30px rgba(0,0,0,.55);
+    }
+    body.light{
+      --bg:#f7f8fb; --card:#fff; --text:#111; --accent:#1f78ff; --muted:#333;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;-webkit-font-smoothing:antialiased}
+
+    /* Sidebar */
+    .sidebar{
+      width:260px;background:var(--card);padding:18px;position:fixed;left:-280px;top:0;bottom:0;z-index:1100;
+      box-shadow:var(--shadow);transition:left .28s ease;
+    }
+    .sidebar.open{left:0}
+    @media(min-width:1100px){ .sidebar{left:0} }
+
+    .logo{font-weight:800;font-size:18px;margin-bottom:12px}
+    .nav{display:flex;flex-direction:column;gap:10px}
+    .nav a{display:block;padding:10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#ee0979);color:#fff;text-decoration:none;text-align:center;font-weight:700}
+    .nav a.active{box-shadow:0 6px 20px rgba(0,0,0,.3);opacity:0.98}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* toggle button - inside topbar */
+    .toggle-btn{
+      background:var(--accent);color:#fff;border:0;padding:8px 10px;border-radius:8px;
+      cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);font-size:18px;
+    }
+    @media(min-width:1100px){ .toggle-btn{display:none} }
+
+    /* main content */
+    main{transition:margin .28s;padding:20px 18px 40px;min-height:100vh;}
+    @media(min-width:1100px){ main{margin-left:260px} }
+
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding-top:8px}
+    .title{font-size:20px;margin:0}
+    .subtitle{color:var(--muted);font-size:13px}
+
+    .grid{display:grid;gap:14px}
+    @media(min-width:900px){ .grid{grid-template-columns:1fr 380px} }
+    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);max-width:1000px;margin:8px auto}
+
+    /* preview */
+    .preview{height:320px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#00ffff,#00ff00)}
+    @media(max-width:520px){ .preview{height:200px} }
+
+    /* controls */
+    .controls{max-width:720px;margin:auto;display:flex;flex-direction:column;gap:10px}
+    .controls label{font-weight:700;margin-bottom:6px}
+    .color-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    input[type="color"]{width:56px;height:44px;border-radius:8px;border:2px solid #111;padding:0;cursor:pointer}
+    input[type="range"],select,textarea{width:100%}
+    textarea{min-height:110px;border-radius:8px;padding:10px;background:#0b0b0b;color:#0f0;font-family:monospace}
+
+    .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+    .btn{padding:10px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:700}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)}
+    .btn.small{padding:8px 10px;font-size:14px}
+
+    footer{margin-top:18px;text-align:center;color:var(--muted);padding-bottom:30px}
+
+    @media(max-width:1099px){
+      .sidebar{left:-100%}
+      .sidebar.open{left:0}
+      main{margin-left:0}
+    }
+    
+    /* Page content styles */
+    .page-content {display: none;}
+    .page-content.active {display: block;}
+    
+    /* Saved gradients */
+    .saved-gradients {display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 16px;}
+    .saved-item {height: 80px; border-radius: 8px; cursor: pointer; position: relative;}
+    .saved-item:hover {transform: scale(1.05); transition: transform 0.2s;}
+    .saved-item .delete {position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px;}
+    
+    /* Contact form */
+    .contact-form {max-width: 600px; margin: 0 auto;}
+    .form-group {margin-bottom: 16px;}
+    .form-group label {display: block; margin-bottom: 6px; font-weight: bold;}
+    .form-group input, .form-group textarea {width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--card); color: var(--text);}
+    .form-group textarea {min-height: 120px;}
+    
+    /* Content pages */
+    .content-card {max-width: 800px; margin: 0 auto;}
+    .content-card h2 {margin-top: 0;}
+    .content-card p {line-height: 1.6;}
+    
+    /* Breadcrumb */
+    .breadcrumb {font-size: 14px; margin-bottom: 16px; color: var(--muted);}
+    .breadcrumb a {color: var(--accent); text-decoration: none;}
+    
+    /* Loading indicator */
+    .loading {display: none; text-align: center; padding: 20px;}
+    .loading.active {display: block;}
+  </style>
+</head>
+<body>
+  <!-- sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="logo">🎨 CSS Gradient Generator</div>
+    <nav class="nav" id="mainNav">
+      <a href="#" data-page="home" class="active">🏠 Home</a>
+      <a href="#" data-page="about">ℹ️ About</a>
+      <a href="#" data-page="privacy">🔒 Privacy</a>
+      <a href="#" data-page="terms">📜 Terms</a>
+      <a href="#" data-page="disclaimer">⚠️ Disclaimer</a>
+      <a href="#" data-page="contact">✉️ Contact</a>
+      <a href="#" data-page="saved">💾 Saved</a>
+    </nav>
+    <p class="small" style="margin-top:14px;text-align:center">Contact: <a href="mailto:zayyansensetech@gmail.com">zayyansensetech@gmail.com</a></p>
+    <div style="text-align:center;margin-top:12px"><button id="themeToggle" class="btn ghost small">🌙 Toggle Theme</button></div>
+  </aside>
+
+  <main>
+    <!-- Breadcrumb navigation -->
+    <div class="breadcrumb">
+      <a href="#" data-page="home">Home</a> > <span id="current-page">CSS Gradient Generator</span>
+    </div>
+    
+    <div class="topbar">
+      <div>
+        <h1 class="title" id="pageTitle">CSS Gradient Generator</h1>
+        <div class="subtitle" id="pageSubtitle">Pick colors, adjust angle, export PNG/JPG/SVG, copy CSS, save favorites.</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="randomBtnTop" class="btn ghost small" title="Random">🎲</button>
+        <button id="reverseTopBtn" class="btn ghost small" title="Reverse">↔</button>
+        <button id="toggleBtn" class="toggle-btn">☰</button>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div class="loading" id="loading">Loading content...</div>
+
+    <!-- Home Page -->
+    <div id="home" class="page-content active">
+      <div class="grid">
+        <section class="card">
+          <div class="preview" id="preview">Gradient Preview</div>
+          <div class="controls">
+            <label>Colors:</label>
+            <div class="color-row">
+              <input type="color" id="color1" value="#00ffff">
+              <input type="color" id="color2" value="#00ff00">
+            </div>
+            <label>Angle:</label>
+            <input type="range" id="angle" min="0" max="360" value="90">
+            <label>Gradient CSS:</label>
+            <textarea id="cssCode" readonly></textarea>
+            <div class="actions">
+              <button id="copyBtn" class="btn">Copy CSS</button>
+              <button id="randomBtn" class="btn ghost">🎲 Random</button>
+              <button id="reverseBtn" class="btn ghost">↔ Reverse</button>
+              <button id="saveBtn" class="btn">💾 Save</button>
+              <button id="pngBtn" class="btn ghost">📷 PNG</button>
+              <button id="jpgBtn" class="btn ghost">🖼 JPG</button>
+              <button id="svgBtn" class="btn ghost">🗂 SVG</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-content">
+      <div class="card content-card">
+        <h2>About CSS Gradient Generator</h2>
+        <p>Our CSS Gradient Generator is a free online tool that helps designers and developers create beautiful gradient backgrounds for their websites and applications.</p>
+        <p>With this tool, you can:</p>
+        <ul>
+          <li>Choose from millions of color combinations</li>
+          <li>Adjust the gradient angle to your preference</li>
+          <li>Copy the CSS code with a single click</li>
+          <li>Export your gradients as PNG, JPG, or SVG files</li>
+          <li>Save your favorite gradients for later use</li>
+          <li>Generate random gradients for inspiration</li>
+        </ul>
+        <p>Whether you're a professional designer or just starting out, our gradient generator makes it easy to create stunning visual elements for your projects.</p>
+      </div>
+    </div>
+
+    <!-- Privacy Policy Page -->
+    <div id="privacy" class="page-content">
+      <div class="card content-card">
+        <h2>Privacy Policy</h2>
+        <p>Last updated: March 2023</p>
+        <p>At CSS Gradient Generator, we take your privacy seriously. This Privacy Policy describes how we collect, use, and share your personal information.</p>
+        
+        <h3>Information We Collect</h3>
+        <p>We only collect information that you voluntarily provide to us, such as when you:</p>
+        <ul>
+          <li>Save gradients to your browser's local storage</li>
+          <li>Contact us through our contact form</li>
+        </ul>
+        
+        <h3>How We Use Your Information</h3>
+        <p>We use the information we collect to:</p>
+        <ul>
+          <li>Provide and maintain our service</li>
+          <li>Respond to your inquiries and support requests</li>
+          <li>Improve our website and services</li>
+        </ul>
+        
+        <h3>Data Storage</h3>
+        <p>Your saved gradients are stored locally in your browser and are not transmitted to our servers.</p>
+        
+        <h3>Contact Us</h3>
+        <p>If you have any questions about this Privacy Policy, please contact us at zayyansensetech@gmail.com.</p>
+      </div>
+    </div>
+
+    <!-- Terms of Service Page -->
+    <div id="terms" class="page-content">
+      <div class="card content-card">
+        <h2>Terms of Service</h2>
+        <p>Last updated: March 2023</p>
+        
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing and using CSS Gradient Generator, you accept and agree to be bound by the terms and provision of this agreement.</p>
+        
+        <h3>2. Use License</h3>
+        <p>Permission is granted to use this website for personal, non-commercial purposes. This is the grant of a license, not a transfer of title.</p>
+        
+        <h3>3. Disclaimer</h3>
+        <p>The materials on CSS Gradient Generator are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+        
+        <h3>4. Limitations</h3>
+        <p>In no event shall CSS Gradient Generator or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.</p>
+        
+        <h3>5. Revisions and Errata</h3>
+        <p>The materials appearing on CSS Gradient Generator could include technical, typographical, or photographic errors. We do not warrant that any of the materials on its website are accurate, complete or current.</p>
+        
+        <h3>6. Changes to Terms</h3>
+        <p>We may revise these terms of service at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
+      </div>
+    </div>
+
+    <!-- Disclaimer Page -->
+    <div id="disclaimer" class="page-content">
+      <div class="card content-card">
+        <h2>Disclaimer</h2>
+        <p>Last updated: March 2023</p>
+        
+        <h3>No Warranty</h3>
+        <p>The information provided by CSS Gradient Generator ("we," "us," or "our") on https://yourwebsite.com (the "Site") is for general informational purposes only. All information on the Site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site.</p>
+        
+        <h3>External Links Disclaimer</h3>
+        <p>The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or originating from third parties. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us.</p>
+        
+        <h3>Professional Disclaimer</h3>
+        <p>The Site cannot and does not contain design advice. The design information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. We do not provide any kind of design advice.</p>
+        
+        <h3>Contact Us</h3>
+        <p>If you have any questions about this Disclaimer, You can contact us at zayyansensetech@gmail.com.</p>
+      </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-content">
+      <div class="card content-card">
+        <h2>Contact Us</h2>
+        <p>Have questions, suggestions, or need support? We'd love to hear from you!</p>
+        
+        <div class="contact-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Type your message here..."></textarea>
+          </div>
+          
+          <button id="sendMessage" class="btn">Send Message</button>
+        </div>
+        
+        <p style="margin-top: 20px;">You can also reach us directly at: <a href="mailto:zayyansensetech@gmail.com">zayyansensetech@gmail.com</a></p>
+      </div>
+    </div>
+
+    <!-- Saved Gradients Page -->
+    <div id="saved" class="page-content">
+      <div class="card content-card">
+        <h2>Your Saved Gradients</h2>
+        <p>Here are all the gradients you've saved. Click on any gradient to apply it to the generator.</p>
+        
+        <div id="savedGradients" class="saved-gradients">
+          <!-- Saved gradients will be displayed here -->
+        </div>
+        
+        <div id="noSaved" style="text-align: center; padding: 20px; display: none;">
+          <p>You haven't saved any gradients yet.</p>
+          <p>Go to the Home page to create and save gradients.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 CSS Gradient Generator</footer>
+  </main>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const themeToggle = document.getElementById('themeToggle');
+    const color1 = document.getElementById('color1');
+    const color2 = document.getElementById('color2');
+    const angle = document.getElementById('angle');
+    const preview = document.getElementById('preview');
+    const cssCode = document.getElementById('cssCode');
+    const copyBtn = document.getElementById('copyBtn');
+    const randomBtn = document.getElementById('randomBtn');
+    const reverseBtn = document.getElementById('reverseBtn');
+    const randomBtnTop = document.getElementById('randomBtnTop');
+    const reverseTopBtn = document.getElementById('reverseTopBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const pngBtn = document.getElementById('pngBtn');
+    const jpgBtn = document.getElementById('jpgBtn');
+    const svgBtn = document.getElementById('svgBtn');
+    const pageTitle = document.getElementById('pageTitle');
+    const pageSubtitle = document.getElementById('pageSubtitle');
+    const sendMessage = document.getElementById('sendMessage');
+    const savedGradients = document.getElementById('savedGradients');
+    const noSaved = document.getElementById('noSaved');
+    const navLinks = document.querySelectorAll('.nav a');
+    const loading = document.getElementById('loading');
+    const currentPage = document.getElementById('current-page');
+
+    // Page titles and subtitles
+    const pageInfo = {
+      home: {
+        title: "CSS Gradient Generator",
+        subtitle: "Pick colors, adjust angle, export PNG/JPG/SVG, copy CSS, save favorites."
+      },
+      about: {
+        title: "About CSS Gradient Generator",
+        subtitle: "Learn more about our tool and its features"
+      },
+      privacy: {
+        title: "Privacy Policy",
+        subtitle: "How we handle your data and privacy"
+      },
+      terms: {
+        title: "Terms of Service",
+        subtitle: "Terms and conditions for using our service"
+      },
+      disclaimer: {
+        title: "Disclaimer",
+        subtitle: "Important legal information"
+      },
+      contact: {
+        title: "Contact Us",
+        subtitle: "Get in touch with our team"
+      },
+      saved: {
+        title: "Saved Gradients",
+        subtitle: "Your collection of favorite gradients"
+      }
+    };
+
+    // Navigation function
+    function navigateTo(page) {
+      // Show loading indicator
+      loading.classList.add('active');
+      
+      // Hide all pages
+      document.querySelectorAll('.page-content').forEach(p => {
+        p.classList.remove('active');
+      });
+      
+      // Update page title and subtitle
+      pageTitle.textContent = pageInfo[page].title;
+      pageSubtitle.textContent = pageInfo[page].subtitle;
+      currentPage.textContent = pageInfo[page].title;
+      
+      // Update active nav link
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-page') === page) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      
+      // Load saved gradients if on saved page
+      if (page === 'saved') {
+        setTimeout(() => {
+          loadSavedGradients();
+          loading.classList.remove('active');
+          document.getElementById(page).classList.add('active');
+        }, 300);
+      } else {
+        // Show the selected page after a short delay to simulate loading
+        setTimeout(() => {
+          loading.classList.remove('active');
+          document.getElementById(page).classList.add('active');
+        }, 300);
+      }
+      
+      // Close sidebar on mobile after navigation
+      if (window.innerWidth < 1100) {
+        sidebar.classList.remove('open');
+      }
+    }
+
+    // Load saved gradients
+    function loadSavedGradients() {
+      const saved = JSON.parse(localStorage.getItem("gradients") || "[]");
+      savedGradients.innerHTML = '';
+      
+      if (saved.length === 0) {
+        noSaved.style.display = 'block';
+        return;
+      }
+      
+      noSaved.style.display = 'none';
+      
+      saved.forEach((gradient, index) => {
+        // Extract colors from gradient CSS
+        const colorsMatch = gradient.match(/linear-gradient\(.*?,\s*(.*?),\s*(.*?)\)/);
+        if (colorsMatch) {
+          const color1 = colorsMatch[1];
+          const color2 = colorsMatch[2];
+          
+          const item = document.createElement('div');
+          item.className = 'saved-item';
+          item.style.background = gradient;
+          item.title = gradient;
+          item.setAttribute('aria-label', `Saved gradient with colors ${color1} and ${color2}`);
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'delete';
+          deleteBtn.textContent = '×';
+          deleteBtn.setAttribute('aria-label', 'Delete this gradient');
+          deleteBtn.onclick = (e) => {
+            e.stopPropagation();
+            deleteGradient(index);
+          };
+          
+          item.appendChild(deleteBtn);
+          item.onclick = () => applySavedGradient(gradient);
+          
+          savedGradients.appendChild(item);
+        }
+      });
+    }
+    
+    // Apply saved gradient
+    function applySavedGradient(gradient) {
+      // Extract values from gradient CSS
+      const angleMatch = gradient.match(/linear-gradient\((.*?)deg/);
+      const colorsMatch = gradient.match(/linear-gradient\(.*?,\s*(.*?),\s*(.*?)\)/);
+      
+      if (angleMatch && colorsMatch) {
+        angle.value = angleMatch[1];
+        color1.value = colorsMatch[1];
+        color2.value = colorsMatch[2];
+        updateGradient();
+        navigateTo('home');
+      }
+    }
+    
+    // Delete saved gradient
+    function deleteGradient(index) {
+      const saved = JSON.parse(localStorage.getItem("gradients") || "[]");
+      saved.splice(index, 1);
+      localStorage.setItem("gradients", JSON.stringify(saved));
+      loadSavedGradients();
+    }
+
+    // Update gradient preview and CSS code
+    function updateGradient() {
+      const gradient = `linear-gradient(${angle.value}deg, ${color1.value}, ${color2.value})`;
+      preview.style.background = gradient;
+      cssCode.value = `background: ${gradient};`;
+    }
+
+    // Generate random color
+    function randomColor() {
+      return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    }
+
+    // Generate random gradient
+    function randomGradient() {
+      color1.value = randomColor();
+      color2.value = randomColor();
+      angle.value = Math.floor(Math.random()*361);
+      updateGradient();
+    }
+
+    // Reverse gradient colors
+    function reverseGradient() {
+      const temp = color1.value;
+      color1.value = color2.value;
+      color2.value = temp;
+      updateGradient();
+    }
+
+    // Copy CSS to clipboard
+    function copyCSS() {
+      cssCode.select();
+      document.execCommand("copy");
+      alert("CSS copied to clipboard!");
+    }
+
+    // Save gradient to localStorage
+    function saveGradient() {
+      const saved = JSON.parse(localStorage.getItem("gradients") || "[]");
+      saved.push(cssCode.value);
+      localStorage.setItem("gradients", JSON.stringify(saved));
+      alert("Gradient saved to your collection!");
+    }
+
+    // Download gradient as image
+    function downloadImage(type) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 800; canvas.height = 600;
+      const ctx = canvas.getContext("2d");
+      const grad = ctx.createLinearGradient(0,0,800,600);
+      grad.addColorStop(0, color1.value);
+      grad.addColorStop(1, color2.value);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,800,600);
+      const link = document.createElement("a");
+      link.download = `gradient.${type}`;
+      link.href = canvas.toDataURL("image/"+type);
+      link.click();
+    }
+
+    // Send contact message (placeholder function)
+    function sendContactMessage() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      
+      if (!name || !email || !message) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      // In a real implementation, you would send this data to a server
+      alert('Thank you for your message! We\'ll get back to you soon.');
+      
+      // Clear form
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    }
+
+    // Event listeners
+    toggleBtn.addEventListener("click", () => sidebar.classList.toggle("open"));
+    themeToggle.addEventListener("click", () => document.body.classList.toggle("light"));
+    color1.addEventListener("input", updateGradient);
+    color2.addEventListener("input", updateGradient);
+    angle.addEventListener("input", updateGradient);
+    copyBtn.addEventListener("click", copyCSS);
+    randomBtn.addEventListener("click", randomGradient);
+    reverseBtn.addEventListener("click", reverseGradient);
+    randomBtnTop.addEventListener("click", randomGradient);
+    reverseTopBtn.addEventListener("click", reverseGradient);
+    saveBtn.addEventListener("click", saveGradient);
+    pngBtn.addEventListener("click", () => downloadImage("png"));
+    jpgBtn.addEventListener("click", () => downloadImage("jpeg"));
+    svgBtn.addEventListener("click", () => {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" gradientTransform="rotate(${angle.value})"><stop offset="0%" stop-color="${color1.value}"/><stop offset="100%" stop-color="${color2.value}"/></linearGradient></defs><rect width="800" height="600" fill="url(#g)"/></svg>`;
+      const blob = new Blob([svg], {type:"image/svg+xml"});
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "gradient.svg";
+      link.click();
+    });
+    
+    sendMessage.addEventListener("click", sendContactMessage);
+    
+    // Navigation event listeners
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        navigateTo(page);
+      });
+    });
+    
+    // Breadcrumb navigation
+    document.querySelector('.breadcrumb a').addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateTo('home');
+    });
+
+    // Initialize
+    updateGradient();
+  </script>
+</body>
+</html>
