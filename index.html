@@ -9,6 +9,9 @@
   <meta name="keywords" content="css gradient, gradient generator, css gradient generator, background gradient, linear gradient, css tools, web design tools" />
   <meta name="author" content="Zayyan Sense Tech" />
 
+  <!-- Monetag Ads Script -->
+  <script async src="https://cdn.monetag.com/tag.min.js" data-publisher-id="YOUR_PUBLISHER_ID"></script>
+
   <style>
     :root{
       --bg:#111; --card:#1f1f1f; --text:#fff; --accent:#2575fc;
@@ -109,6 +112,64 @@
     /* Loading indicator */
     .loading {display: none; text-align: center; padding: 20px;}
     .loading.active {display: block;}
+    
+    /* Ad containers */
+    .ad-container {
+      margin: 20px 0;
+      text-align: center;
+      min-height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    
+    .ad-label {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+    
+    .ad-placeholder {
+      width: 300px;
+      height: 250px;
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      margin: 0 auto;
+    }
+    
+    .ad-placeholder.horizontal {
+      width: 728px;
+      height: 90px;
+    }
+    
+    @media (max-width: 768px) {
+      .ad-placeholder.horizontal {
+        width: 100%;
+        max-width: 728px;
+        height: 90px;
+      }
+      
+      .ad-placeholder {
+        width: 300px;
+        height: 250px;
+      }
+    }
+    
+    .sidebar-ad {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -124,11 +185,22 @@
       <a href="#" data-page="contact">✉️ Contact</a>
       <a href="#" data-page="saved">💾 Saved</a>
     </nav>
+    
+    <!-- Sidebar Ad -->
+    <div class="ad-container sidebar-ad">
+      <div data-monetag="1"></div>
+    </div>
+    
     <p class="small" style="margin-top:14px;text-align:center">Contact: <a href="mailto:zayyansensetech@gmail.com">zayyansensetech@gmail.com</a></p>
     <div style="text-align:center;margin-top:12px"><button id="themeToggle" class="btn ghost small">🌙 Toggle Theme</button></div>
   </aside>
 
   <main>
+    <!-- Header Ad -->
+    <div class="ad-container">
+      <div data-monetag="5"></div>
+    </div>
+    
     <!-- Breadcrumb navigation -->
     <div class="breadcrumb">
       <a href="#" data-page="home">Home</a> > <span id="current-page">CSS Gradient Generator</span>
@@ -175,6 +247,11 @@
             </div>
           </div>
         </section>
+      </div>
+      
+      <!-- Content Ad -->
+      <div class="ad-container">
+        <div data-monetag="6"></div>
       </div>
     </div>
 
@@ -316,6 +393,11 @@
           <p>Go to the Home page to create and save gradients.</p>
         </div>
       </div>
+    </div>
+
+    <!-- Footer Ad -->
+    <div class="ad-container">
+      <div data-monetag="5"></div>
     </div>
 
     <footer>© 2025 CSS Gradient Generator</footer>
