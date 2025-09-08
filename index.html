@@ -9,9 +9,6 @@
   <meta name="keywords" content="css gradient, gradient generator, css gradient generator, background gradient, linear gradient, css tools, web design tools" />
   <meta name="author" content="Zayyan Sense Tech" />
 
-  <!-- Ad Script -->
-  <script src="https://fpyf8.com/88/tag.min.js" data-zone="168988" async data-cfasync="false"></script>
-
   <style>
     :root{
       --bg:#111; --card:#1f1f1f; --text:#fff; --accent:#2575fc;
@@ -24,6 +21,28 @@
 
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;-webkit-font-smoothing:antialiased}
+
+    /* Ad Styles */
+    .ad-container {
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .ad-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+    .sidebar-ad {
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius);
+    }
 
     /* Sidebar */
     .sidebar{
@@ -112,64 +131,6 @@
     /* Loading indicator */
     .loading {display: none; text-align: center; padding: 20px;}
     .loading.active {display: block;}
-    
-    /* Ad containers */
-    .ad-container {
-      margin: 20px 0;
-      text-align: center;
-      min-height: 90px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 8px;
-      padding: 10px;
-    }
-    
-    .ad-label {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      margin-bottom: 8px;
-    }
-    
-    .ad-placeholder {
-      width: 300px;
-      height: 250px;
-      background: linear-gradient(135deg, #2575fc, #6a11cb);
-      border-radius: 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-weight: bold;
-      margin: 0 auto;
-    }
-    
-    .ad-placeholder.horizontal {
-      width: 728px;
-      height: 90px;
-    }
-    
-    @media (max-width: 768px) {
-      .ad-placeholder.horizontal {
-        width: 100%;
-        max-width: 728px;
-        height: 90px;
-      }
-      
-      .ad-placeholder {
-        width: 300px;
-        height: 250px;
-      }
-    }
-    
-    .sidebar-ad {
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -187,8 +148,19 @@
     </nav>
     
     <!-- Sidebar Ad -->
-    <div class="ad-container sidebar-ad">
-      <div id="ad-sidebar"></div>
+    <div class="sidebar-ad">
+      <div class="ad-label">Advertisement</div>
+      <div id="sidebar-ad" class="ad-container">
+        <!-- Adsterra Sidebar Ad -->
+        <script>
+          // This will be replaced with actual Adsterra ad code
+          document.getElementById('sidebar-ad').innerHTML = `
+            <a href="#">
+              <img src="https://via.placeholder.com/250x250/2575fc/ffffff?text=Adsterra+Ad" alt="Advertisement" style="max-width:100%;border-radius:8px;">
+            </a>
+          `;
+        </script>
+      </div>
     </div>
     
     <p class="small" style="margin-top:14px;text-align:center">Contact: <a href="mailto:zayyansensetech@gmail.com">zayyansensetech@gmail.com</a></p>
@@ -196,9 +168,20 @@
   </aside>
 
   <main>
-    <!-- Header Ad -->
-    <div class="ad-container">
-      <div id="ad-header"></div>
+    <!-- Top Banner Ad -->
+    <div class="ad-container" style="max-width:728px;">
+      <div class="ad-label">Advertisement</div>
+      <div id="top-banner-ad" class="ad-container">
+        <!-- Adsterra Top Banner Ad -->
+        <script>
+          // This will be replaced with actual Adsterra ad code
+          document.getElementById('top-banner-ad').innerHTML = `
+            <a href="#">
+              <img src="https://via.placeholder.com/728x90/2575fc/ffffff?text=Adsterra+Banner+Ad" alt="Advertisement" style="max-width:100%;border-radius:8px;">
+            </a>
+          `;
+        </script>
+      </div>
     </div>
     
     <!-- Breadcrumb navigation -->
@@ -247,11 +230,6 @@
             </div>
           </div>
         </section>
-      </div>
-      
-      <!-- Content Ad -->
-      <div class="ad-container">
-        <div id="ad-content"></div>
       </div>
     </div>
 
@@ -396,8 +374,19 @@
     </div>
 
     <!-- Footer Ad -->
-    <div class="ad-container">
-      <div id="ad-footer"></div>
+    <div class="ad-container" style="max-width:728px; margin-top: 20px;">
+      <div class="ad-label">Advertisement</div>
+      <div id="footer-ad" class="ad-container">
+        <!-- Adsterra Footer Ad -->
+        <script>
+          // This will be replaced with actual Adsterra ad code
+          document.getElementById('footer-ad').innerHTML = `
+            <a href="#">
+              <img src="https://via.placeholder.com/728x90/2575fc/ffffff?text=Adsterra+Footer+Ad" alt="Advertisement" style="max-width:100%;border-radius:8px;">
+            </a>
+          `;
+        </script>
+      </div>
     </div>
 
     <footer>© 2025 CSS Gradient Generator</footer>
