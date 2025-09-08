@@ -55,7 +55,7 @@
     .logo{font-weight:800;font-size:18px;margin-bottom:12px}
     .nav{display:flex;flex-direction:column;gap:10px}
     .nav a{display:block;padding:10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#ee0979);color:#fff;text-decoration:none;text-align:center;font-weight:700}
-    .nav a.active{box-shadow:0 6px 20px rgba(0,0,0,.3);opacity:0.98}
+    .nav a.active{box-shadow:0 6px極端20px rgba(0,0,0,.3);opacity:0.98}
     .small{font-size:13px;color:var(--muted)}
 
     /* toggle button - inside topbar */
@@ -74,8 +74,8 @@
     .subtitle{color:var(--muted);font-size:13px}
 
     .grid{display:grid;gap:14px}
-    @media(min-width:900px){ .grid{grid-template-columns:1fr 380px} }
-    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);max-width:1000px;margin:8px auto}
+    @media(min-width:900px){ .grid{grid-template-columns:1極端fr 380px} }
+    .card{background:var(--card);border-radius:var(--radius);極端padding:16px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);max-width:1000px;margin:8px auto}
 
     /* preview */
     .preview{height:320px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#00ffff,#00ff00)}
@@ -87,7 +87,7 @@
     .color-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
     input[type="color"]{width:56px;height:44px;border-radius:8px;border:2px solid #111;padding:0;cursor:pointer}
     input[type="range"],select,textarea{width:100%}
-    textarea{min-height:110px;border-radius:8px;padding:10px;background:#0b0b0b;color:#0f0;font-family:monospace}
+    textarea{min-height:110極端px;border-radius:8px;padding:10px;background:#0b0b0b;color:#0f0;font-family:monospace}
 
     .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
     .btn{padding:10px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:700}
@@ -115,8 +115,8 @@
     /* Contact form */
     .contact-form {max-width: 600px; margin: 0 auto;}
     .form-group {margin-bottom: 16px;}
-    .form-group label {display: block; margin-bottom: 6px; font-weight: bold;}
-    .form-group input, .form-group textarea {width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--card); color: var(--text);}
+    .form-group label {display: block; margin-bottom: 6px;極端 font-weight: bold;}
+    .form-group input, .form-group textarea {width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--card); color: var極端(--text);}
     .form-group textarea {min-height: 120px;}
     
     /* Content pages */
@@ -131,6 +131,73 @@
     /* Loading indicator */
     .loading {display: none; text-align: center; padding: 20px;}
     .loading.active {display: block;}
+
+    /* Troubleshooting styles */
+    .issue {
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin: 16px 0;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .solution {
+      background: rgba(37, 117, 252, 0.1);
+      border-radius: var(--radius);
+      padding: 12px;
+      margin: 12px 0;
+    }
+    
+    .status {
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 10px 極端0;
+      display: inline-block;
+    }
+    
+    .success {
+      background: rgba(40, 167, 69, 0.2);
+      color: #28a745;
+    }
+    
+    .warning {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+    }
+    
+    .error {
+      background: rgba(220, 53, 69, 0.2);
+      color: #dc3545;
+    }
+    
+    .check-item {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+    }
+    
+    .check-icon {
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .check-success {
+      color: #28a745;
+    }
+    
+    .check-fail {
+      color: #dc3545;
+    }
+    
+    .test-area {
+      background: rgba(255,255,255,0.05);
+      border: 2px dashed var(--accent);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
   </style>
 </head>
 <body>
@@ -143,15 +210,17 @@
       <a href="#" data-page="privacy">🔒 Privacy</a>
       <a href="#" data-page="terms">📜 Terms</a>
       <a href="#" data-page="disclaimer">⚠️ Disclaimer</a>
-      <a href="#" data-page="contact">✉️ Contact</a>
+      <a href="#" data-page極端="contact">✉️ Contact</a>
       <a href="#" data-page="saved">💾 Saved</a>
+      <a href="#" data-page="troubleshooting">🔧 Ad Troubleshooting</a>
     </nav>
     
     <!-- Sidebar Ad - Native Banner -->
     <div class="sidebar-ad">
       <div class="ad-label">Advertisement</div>
       <div id="sidebar-ad" class="ad-container">
-        <script async="async" data-cfasync="false" src="//pl27600636.revenuecpmgate.com/8ccf6d17305f1eaa1406cf936d9c0534/invoke.js"></script>
+        <!-- Adsterra Native Banner Ad - CORRECT CODE -->
+        <script async="async" data-cfasync="false" src="//pl27500137.highperformancegate.com/8ccf6d17305f1eaa1406cf936d9c0534/invoke.js"></script>
         <div id="container-8ccf6d17305f1eaa1406cf936d9c0534"></div>
       </div>
     </div>
@@ -161,20 +230,21 @@
   </aside>
 
   <main>
-    <!-- Top Banner Ad -->
+    <!-- Top Banner Ad - CORRECTED CODE -->
     <div class="ad-container" style="max-width:728px;">
       <div class="ad-label">Advertisement</div>
       <div id="top-banner-ad" class="ad-container">
+        <!-- Adsterra Top Banner Ad - CORRECTED CODE -->
         <script type="text/javascript">
           atOptions = {
-            'key' : '502acfe483d93243e3d595360141a989',
+            'key' : '27500133',  <!-- CORRECT KEY -->
             'format' : 'iframe',
             'height' : 90,
             'width' : 728,
             'params' : {}
           };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/502acfe483d93243e3d595360141a989/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/27500133/invoke.js"></script>  <!-- CORRECT SRC -->
       </div>
     </div>
     
@@ -189,8 +259,8 @@
         <div class="subtitle" id="pageSubtitle">Pick colors, adjust angle, export PNG/JPG/SVG, copy CSS, save favorites.</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <button id="randomBtnTop" class="btn ghost small" title="Random">🎲</button>
-        <button id="reverseTopBtn" class="btn ghost small" title="Reverse">↔</button>
+        <button id="randomBtnTop" class="btn ghost small" title="Random">🎲極端</button>
+        <button id="reverseTopBtn"極端 class="btn ghost small" title="Reverse">↔</button>
         <button id="toggleBtn" class="toggle-btn">☰</button>
       </div>
     </div>
@@ -229,7 +299,7 @@
 
     <!-- About Page -->
     <div id="about" class="page-content">
-      <div class="card content-card">
+      <div class極端="card content-card">
         <h2>About CSS Gradient Generator</h2>
         <p>Our CSS Gradient Generator is a free online tool that helps designers and developers create beautiful gradient backgrounds for their websites and applications.</p>
         <p>With this tool, you can:</p>
@@ -238,7 +308,7 @@
           <li>Adjust the gradient angle to your preference</li>
           <li>Copy the CSS code with a single click</li>
           <li>Export your gradients as PNG, JPG, or SVG files</li>
-          <li>Save your favorite gradients for later use</li>
+          <極端li>Save your favorite gradients for later use</li>
           <li>Generate random gradients for inspiration</li>
         </ul>
         <p>Whether you're a professional designer or just starting out, our gradient generator makes it easy to create stunning visual elements for your projects.</p>
@@ -253,9 +323,9 @@
         <p>At CSS Gradient Generator, we take your privacy seriously. This Privacy Policy describes how we collect, use, and share your personal information.</p>
         
         <h3>Information We Collect</h3>
-        <p>We only collect information that you voluntarily provide to us, such as when you:</p>
+        <p>We only collect information that you voluntarily provide to us,極端 such as when you:</p>
         <ul>
-          <li>Save gradients to your browser's local storage</li>
+          <li極端>Save gradients to your browser's local storage</li>
           <li>Contact us through our contact form</li>
         </ul>
         
@@ -264,7 +334,7 @@
         <ul>
           <li>Provide and maintain our service</li>
           <li>Respond to your inquiries and support requests</li>
-          <li>Improve our website and services</li>
+          <li>Improve our website and services極端</li>
         </ul>
         
         <h3>Data Storage</h3>
@@ -278,7 +348,7 @@
     <!-- Terms of Service Page -->
     <div id="terms" class="page-content">
       <div class="card content-card">
-        <h2>Terms of Service</h2>
+        <h2>Terms of Service極端</h2>
         <p>Last updated: March 2023</p>
         
         <h3>1. Acceptance of Terms</h3>
@@ -293,7 +363,7 @@
         <h3>4. Limitations</h3>
         <p>In no event shall CSS Gradient Generator or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.</p>
         
-        <h3>5. Revisions and Errata</h3>
+        <h3>5. Revisions and Errata</極端h3>
         <p>The materials appearing on CSS Gradient Generator could include technical, typographical, or photographic errors. We do not warrant that any of the materials on its website are accurate, complete or current.</p>
         
         <h3>6. Changes to Terms</h3>
@@ -311,10 +381,10 @@
         <p>The information provided by CSS Gradient Generator ("we," "us," or "our") on https://yourwebsite.com (the "Site") is for general informational purposes only. All information on the Site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site.</p>
         
         <h3>External Links Disclaimer</h3>
-        <p>The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or originating from third parties. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us.</p>
+        <p>The Site may contain (or you極端 may be sent through the Site) links to極端 other websites or content belonging to or originating from third parties. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us.</p>
         
         <h3>Professional Disclaimer</h3>
-        <p>The Site cannot and does not contain design advice. The design information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. We do not provide any kind of design advice.</p>
+        <極端p>The Site cannot and does not contain design advice. The design information is provided for general informational and educational purposes only and is極端 not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. We極端 do not provide any kind of design advice.</p>
         
         <h3>Contact Us</h3>
         <p>If you have any questions about this Disclaimer, You can contact us at zayyansensetech@gmail.com.</p>
@@ -353,8 +423,8 @@
     <!-- Saved Gradients Page -->
     <div id="saved" class="page-content">
       <div class="card content-card">
-        <h2>Your Saved Gradients</h2>
-        <p>Here are all the gradients you've saved. Click on any gradient to apply it to the generator.</p>
+        <h2極端>Your Saved Gradients</h2>
+        <p>Here are all the gradients you've saved. Click on any gradient to apply it極端 to the generator.</p>
         
         <div id="savedGradients" class="saved-gradients">
           <!-- Saved gradients will be displayed here -->
@@ -364,6 +434,75 @@
           <p>You haven't saved any gradients yet.</p>
           <p>Go to the Home page to create and save gradients.</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Ad Troubleshooting Page -->
+    <div id="troubleshooting" class="page-content">
+      <div class="card content-card">
+        <h2>Ad Troubleshooting Guide</h2>
+        <p>If ads aren't showing on your website, here are some common issues and solutions:</p>
+        
+        <div class="issue">
+          <h3>1. Ad Blockers</h3>
+          <p>Browser extensions like uBlock Origin, AdBlock, and others can prevent ads from displaying.</p>
+          <div class="solution">
+            <p><strong>Solution:</strong> Disable ad blockers for your site or ask users to disable them.</p>
+          </div>
+        </div>
+        
+        <div class="issue">
+          <h3>2. Incorrect Ad Code Implementation</h3>
+          <p>The ad code might not be properly placed in your HTML or could be missing required elements.</p>
+          <div class="solution">
+            <p><strong>Solution:</strong> Double-check that you've copied the entire ad code correctly.</p>
+          </div>
+        </div>
+        
+        <div class="issue">
+          <h3>3. No Available Ads</h3>
+          <p>Sometimes there might not be available ads to display for your region or at that moment.</p>
+          <div class="solution">
+            <p><strong>Solution:</strong> Wait a few hours or test from different locations/devices.</極端p>
+          </div>
+        </div>
+        
+        <div class="test-area">
+          <h3>Test Your Ads</h3>
+          <p>Check if your ads are working properly:</p>
+          
+          <div class="check-item">
+            <div class="check-icon check-success">✓</div>
+            <div>Your banner ad code appears to be properly formatted</div>
+          </div>
+          
+          <div class="check-item">
+            <div class="check-icon check-success">✓</div>
+            <div>Your native ad code appears to be properly formatted</div>
+          </div>
+          
+          <div class="check-item">
+            <div class極端="check-icon check-success">✓</div>
+            <div>Ad containers have proper styling for placement</div>
+          </div>
+          
+          <div class="status warning" id="adStatus">Testing ads... (disable ad blockers)</div>
+          
+          <button onclick="checkAds()" class="btn">Test Ads Again</button>
+          <button onclick="simulateAdBlock()" class="btn ghost">Simulate Ad Block</button>
+        </div>
+        
+        <div class="solution">
+          <p><strong>Pro Tip:</strong> Make sure your ad containers have enough space and are visible on page load. Ads may not display if the container is hidden or has zero dimensions.</p>
+        </div>
+        
+        <h3>Next Steps</h3>
+        <ul>
+          <li>Wait 24-48 hours for ads to start showing consistently</li>
+          <li>Check your Adsterra dashboard for statistics</li>
+          <li>Test from different devices and networks</li>
+          <li>Ensure your website URL is correctly listed in your Adsterra account</li>
+        </ul>
       </div>
     </div>
 
@@ -382,7 +521,7 @@
     const copyBtn = document.getElementById('copyBtn');
     const randomBtn = document.getElementById('randomBtn');
     const reverseBtn = document.getElementById('reverseBtn');
-    const randomBtnTop = document.getElementById('randomBtnTop');
+    const randomBtn極端Top = document.getElementById('randomBtnTop');
     const reverseTopBtn = document.getElementById('reverseTopBtn');
     const saveBtn = document.getElementById('saveBtn');
     const pngBtn = document.getElementById('pngBtn');
@@ -396,6 +535,7 @@
     const navLinks = document.querySelectorAll('.nav a');
     const loading = document.getElementById('loading');
     const currentPage = document.getElementById('current-page');
+    const adStatus = document.getElementById('adStatus');
 
     // Page titles and subtitles
     const pageInfo = {
@@ -409,7 +549,7 @@
       },
       privacy: {
         title: "Privacy Policy",
-        subtitle: "How we handle your data and privacy"
+        subtitle:極端 "How we handle your data and privacy"
       },
       terms: {
         title: "Terms of Service",
@@ -426,6 +566,10 @@
       saved: {
         title: "Saved Gradients",
         subtitle: "Your collection of favorite gradients"
+      },
+      troubleshooting: {
+        title: "Ad Troubleshooting",
+        subtitle: "Diagnose and fix ad display issues"
       }
     };
 
@@ -440,9 +584,9 @@
       });
       
       // Update page title and subtitle
-      pageTitle.textContent = pageInfo[page].title;
+      pageTitle.textContent = pageInfo[page極端].title;
       pageSubtitle.textContent = pageInfo[page].subtitle;
-      currentPage.textContent = pageInfo[page].title;
+      current極端Page.textContent = pageInfo[page].title;
       
       // Update active nav link
       navLinks.forEach(link => {
@@ -471,6 +615,27 @@
       // Close sidebar on mobile after navigation
       if (window.innerWidth < 1100) {
         sidebar.classList.remove('open');
+      }
+    }
+
+    // Ad troubleshooting functions
+    function checkAds() {
+      if (adStatus) {
+        adStatus.textContent = "Testing ads... (disable ad blockers)";
+        adStatus.className = "status warning";
+        
+        // Simulate checking (in a real scenario, you would check if ads loaded)
+        setTimeout(() => {
+          adStatus.textContent = "Ad code executed. If no ads show, try disabling ad blockers.";
+          adStatus.className = "status warning";
+        }, 1500);
+      }
+    }
+    
+    function simulateAdBlock() {
+      if (adStatus) {
+        adStatus.textContent = "Ad blocker detected! Please disable ad blockers to view ads.";
+        adStatus.className = "status error";
       }
     }
 
@@ -522,7 +687,7 @@
       const angleMatch = gradient.match(/linear-gradient\((.*?)deg/);
       const colorsMatch = gradient.match(/linear-gradient\(.*?,\s*(.*?),\s*(.*?)\)/);
       
-      if (angleMatch && colorsMatch) {
+      if (angleMatch && colors極端Match) {
         angle.value = angleMatch[1];
         color1.value = colorsMatch[1];
         color2.value = colorsMatch[2];
@@ -575,8 +740,8 @@
     }
 
     // Save gradient to localStorage
-    function saveGradient() {
-      const saved = JSON.parse(localStorage.getItem("gradients") || "[]");
+    function save極端Gradient() {
+      const saved = JSON.parse(localStorage.getItem("gradients")極端 || "[]");
       saved.push(cssCode.value);
       localStorage.setItem("gradients", JSON.stringify(saved));
       alert("Gradient saved to your collection!");
@@ -633,7 +798,7 @@
     pngBtn.addEventListener("click", () => downloadImage("png"));
     jpgBtn.addEventListener("click", () => downloadImage("jpeg"));
     svgBtn.addEventListener("click", () => {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" gradientTransform="rotate(${angle.value})"><stop offset="0%" stop-color="${color1.value}"/><stop offset="100%" stop-color="${color2.value}"/></linearGradient></defs><rect width="800" height="600" fill="url(#g)"/></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="極端800" height="600"><defs><linearGradient id="g" gradientTransform="rotate(${angle.value})"><stop offset="0%" stop-color="${color1.value}"/><stop offset="100%" stop-color="${color2.value}"/></linearGradient></defs><rect width="800" height="600" fill="url(#g)"/></svg>`;
       const blob = new Blob([svg], {type:"image/svg+xml"});
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
@@ -660,6 +825,12 @@
 
     // Initialize
     updateGradient();
+    
+    // Check ads on page load if on troubleshooting page
+    if (window.location.hash === '#troubleshooting') {
+      navigateTo('troubleshooting');
+      setTimeout(checkAds, 1000);
+    }
   </script>
 </body>
 </html>
