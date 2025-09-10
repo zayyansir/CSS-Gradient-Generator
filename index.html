@@ -6,8 +6,32 @@
   <title>CSS Gradient Generator | Free Online Gradient Tool</title>
   <meta name="description" content="Create stunning CSS gradients online. Export as PNG, JPG, SVG, copy CSS, generate random gradients, save favorites. Free & SEO-friendly gradient generator." />
   <meta name="robots" content="index,follow" />
-  <meta name="keywords" content="css gradient, gradient generator, css gradient generator, background gradient, linear gradient, css tools, web design tools" />
+  <meta name="keywords" content="css gradient, gradient generator, css gradient generator, background gradient, linear gradient, css tools, web design tools, gradient maker, color gradient" />
   <meta name="author" content="Zayyan Sense Tech" />
+  
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CSS Gradient Generator",
+      "description": "Free online tool to create beautiful CSS gradients for your website designs.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Zayyan Sense Tech"
+      }
+    }
+  </script>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
 
   <style>
     :root{
@@ -22,13 +46,18 @@
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;-webkit-font-smoothing:antialiased}
 
-    /* Ad Styles */
+    /* Ad Styles - RESPONSIVE FOR ALL DEVICES */
     .ad-container {
       margin: 0 auto;
       text-align: center;
       padding: 10px 0;
       border-radius: var(--radius);
       overflow: hidden;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90px;
     }
     .ad-label {
       font-size: 11px;
@@ -43,33 +72,49 @@
       background: rgba(255,255,255,0.05);
       border-radius: var(--radius);
     }
+    
+    /* Responsive adjustments for ads */
+    @media (max-width: 768px) {
+      .ad-container {
+        min-height: 50px;
+        padding: 5px 0;
+      }
+      #top-banner-ad {
+        max-width: 100% !important;
+      }
+    }
 
     /* Sidebar */
     .sidebar{
       width:260px;background:var(--card);padding:18px;position:fixed;left:-280px;top:0;bottom:0;z-index:1100;
       box-shadow:var(--shadow);transition:left .28s ease;
+      overflow-y: auto;
     }
     .sidebar.open{left:0}
-    @media(min-width:1100px){ .sidebar{left:0} }
+    @media(min-width:1100px){ 
+      .sidebar{left:0} 
+      main{margin-left:260px}
+    }
 
-    .logo{font-weight:800;font-size:18px;margin-bottom:12px}
+    .logo{font-weight:800;font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
     .nav{display:flex;flex-direction:column;gap:10px}
-    .nav a{display:block;padding:10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#ee0979);color:#fff;text-decoration:none;text-align:center;font-weight:700}
+    .nav a{display:block;padding:10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#ee0979);color:#fff;text-decoration:none;text-align:center;font-weight:700;transition:transform 0.2s ease, box-shadow 0.2s ease;}
+    .nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
     .nav a.active{box-shadow:0 6px 20px rgba(0,0,0,.3);opacity:0.98}
     .small{font-size:13px;color:var(--muted)}
 
     /* toggle button - inside topbar */
     .toggle-btn{
       background:var(--accent);color:#fff;border:0;padding:8px 10px;border-radius:8px;
-      cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);font-size:18px;
+      cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);font-size:18px;z-index:1000;
     }
     @media(min-width:1100px){ .toggle-btn{display:none} }
 
     /* main content */
     main{transition:margin .28s;padding:20px 18px 40px;min-height:100vh;}
-    @media(min-width:1100px){ main{margin-left:260px} }
+    
 
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding-top:8px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding-top:8px;flex-wrap:wrap;}
     .title{font-size:20px;margin:0}
     .subtitle{color:var(--muted);font-size:13px}
 
@@ -78,23 +123,41 @@
     .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);max-width:1000px;margin:8px auto}
 
     /* preview */
-    .preview{height:320px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#00ffff,#00ff00)}
+    .preview{height:320px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#00ffff,#00ff00);position:relative;}
     @media(max-width:520px){ .preview{height:200px} }
+
+    /* Angle indicator */
+    .angle-indicator {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .angle-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      height: 2px;
+      background: rgba(255,255,255,0.5);
+      transform-origin: left center;
+    }
 
     /* controls */
     .controls{max-width:720px;margin:auto;display:flex;flex-direction:column;gap:10px}
-    .controls label{font-weight:700;margin-bottom:6px}
-    .color-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    .controls label{font-weight:700;margin-bottom:6px;display:block;}
+    .color-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;}
     input[type="color"]{width:56px;height:44px;border-radius:8px;border:2px solid #111;padding:0;cursor:pointer}
     input[type="range"],select,textarea{width:100%}
-    textarea{min-height:110px;border-radius:8px;padding:10px;background:#0b0b0b;color:#0f0;font-family:monospace}
+    textarea{min-height:110px;border-radius:8px;padding:10px;background:#0b0b0b;color:#0f0;font-family:monospace;resize:vertical;}
 
     .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
-    .btn{padding:10px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:700}
+    .btn{padding:10px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:700;transition:all 0.2s ease;}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.3);}
     .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)}
     .btn.small{padding:8px 10px;font-size:14px}
 
-    footer{margin-top:18px;text-align:center;color:var(--muted);padding-bottom:30px}
+    footer{margin-top:18px;text-align:center;color:var(--muted);padding-bottom:30px;font-size:14px;}
 
     @media(max-width:1099px){
       .sidebar{left:-100%}
@@ -108,9 +171,53 @@
     
     /* Saved gradients */
     .saved-gradients {display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 16px;}
-    .saved-item {height: 80px; border-radius: 8px; cursor: pointer; position: relative;}
-    .saved-item:hover {transform: scale(1.05); transition: transform 0.2s;}
+    .saved-item {height: 80px; border-radius: 8px; cursor: pointer; position: relative;transition:transform 0.2s ease;}
+    .saved-item:hover {transform: scale(1.05);}
     .saved-item .delete {position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px;}
+    
+    /* Color palettes */
+    .color-palettes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0;
+      justify-content: center;
+    }
+    .palette {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .palette:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Social share buttons */
+    .social-share {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    .social-btn {
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      font-size: 14px;
+    }
+    .social-btn:hover {
+      background: var(--accent);
+      color: white;
+    }
     
     /* Contact form */
     .contact-form {max-width: 600px; margin: 0 auto;}
@@ -131,6 +238,71 @@
     /* Loading indicator */
     .loading {display: none; text-align: center; padding: 20px;}
     .loading.active {display: block;}
+    
+    /* Toast notifications */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* Responsive design improvements */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn {
+        width: 100%;
+      }
+      .color-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      input[type="color"] {
+        width: 100%;
+        height: 50px;
+      }
+    }
+    
+    /* Focus styles for accessibility */
+    button:focus, input:focus, textarea:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    
+    /* Print styles */
+    @media print {
+      .ad-container, .sidebar-ad, .toggle-btn, .social-share, .btn.ghost {
+        display: none !important;
+      }
+      body, body.light {
+        background: white !important;
+        color: black !important;
+      }
+      .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -142,7 +314,6 @@
       <a href="#" data-page="about">ℹ️ About</a>
       <a href="#" data-page="privacy">🔒 Privacy</a>
       <a href="#" data-page="terms">📜 Terms</a>
-      <a href="#" data-page="disclaimer">⚠️ Disclaimer</a>
       <a href="#" data-page="contact">✉️ Contact</a>
       <a href="#" data-page="saved">💾 Saved</a>
     </nav>
@@ -151,7 +322,8 @@
     <div class="sidebar-ad">
       <div class="ad-label">Advertisement</div>
       <div id="sidebar-ad" class="ad-container">
-        <script async="async" data-cfasync="false" src="//pl27600636.revenuecpmgate.com/8ccf6d17305f1eaa1406cf936d9c0534/invoke.js"></script>
+        <!-- Adsterra Native Banner Ad -->
+        <script async="async" data-cfasync="false" src="//pl27500137.highperformancegate.com/8ccf6d17305f1eaa1406cf936d9c0534/invoke.js"></script>
         <div id="container-8ccf6d17305f1eaa1406cf936d9c0534"></div>
       </div>
     </div>
@@ -165,16 +337,17 @@
     <div class="ad-container" style="max-width:728px;">
       <div class="ad-label">Advertisement</div>
       <div id="top-banner-ad" class="ad-container">
+        <!-- Adsterra Top Banner Ad -->
         <script type="text/javascript">
           atOptions = {
-            'key' : '502acfe483d93243e3d595360141a989',
+            'key' : '27500133',
             'format' : 'iframe',
             'height' : 90,
             'width' : 728,
             'params' : {}
           };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/502acfe483d93243e3d595360141a989/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/27500133/invoke.js"></script>
       </div>
     </div>
     
@@ -202,17 +375,35 @@
     <div id="home" class="page-content active">
       <div class="grid">
         <section class="card">
-          <div class="preview" id="preview">Gradient Preview</div>
-          <div class="controls">
-            <label>Colors:</label>
-            <div class="color-row">
-              <input type="color" id="color1" value="#00ffff">
-              <input type="color" id="color2" value="#00ff00">
+          <div class="preview" id="preview">
+            Gradient Preview
+            <div class="angle-indicator">
+              <div class="angle-line" id="angleLine"></div>
             </div>
-            <label>Angle:</label>
-            <input type="range" id="angle" min="0" max="360" value="90">
-            <label>Gradient CSS:</label>
-            <textarea id="cssCode" readonly></textarea>
+          </div>
+          <div class="controls">
+            <label for="color1">Colors:</label>
+            <div class="color-row">
+              <input type="color" id="color1" value="#00ffff" aria-label="First color">
+              <input type="color" id="color2" value="#00ff00" aria-label="Second color">
+              <button id="swapColors" class="btn ghost small" title="Swap Colors">🔄</button>
+            </div>
+            
+            <label>Popular Color Combinations:</label>
+            <div class="color-palettes">
+              <div class="palette" style="background:linear-gradient(90deg, #ff9a9e, #fad0c4)" onclick="applyPalette('#ff9a9e', '#fad0c4')" aria-label="Warm pink palette"></div>
+              <div class="palette" style="background:linear-gradient(90deg, #a1c4fd, #c2e9fb)" onclick="applyPalette('#a1c4fd', '#c2e9fb')" aria-label="Cool blue palette"></div>
+              <div class="palette" style="background:linear-gradient(90deg, #ffecd2, #fcb69f)" onclick="applyPalette('#ffecd2', '#fcb69f')" aria-label="Peach palette"></div>
+              <div class="palette" style="background:linear-gradient(90deg, #84fab0, #8fd3f4)" onclick="applyPalette('#84fab0', '#8fd3f4')" aria-label="Mint palette"></div>
+              <div class="palette" style="background:linear-gradient(90deg, #d4fc79, #96e6a1)" onclick="applyPalette('#d4fc79', '#96e6a1')" aria-label="Green palette"></div>
+            </div>
+            
+            <label for="angle">Angle: <output id="angleValue">90</output>°</label>
+            <input type="range" id="angle" min="0" max="360" value="90" aria-valuetext="90 degrees">
+            
+            <label for="cssCode">Gradient CSS:</label>
+            <textarea id="cssCode" readonly aria-label="CSS code for gradient"></textarea>
+            
             <div class="actions">
               <button id="copyBtn" class="btn">Copy CSS</button>
               <button id="randomBtn" class="btn ghost">🎲 Random</button>
@@ -222,8 +413,31 @@
               <button id="jpgBtn" class="btn ghost">🖼 JPG</button>
               <button id="svgBtn" class="btn ghost">🗂 SVG</button>
             </div>
+            
+            <div class="social-share">
+              <button class="social-btn" onclick="shareOnTwitter()"><span>🐦</span> Twitter</button>
+              <button class="social-btn" onclick="shareOnFacebook()"><span>📘</span> Facebook</button>
+              <button class="social-btn" onclick="copyLink()"><span>🔗</span> Copy Link</button>
+            </div>
           </div>
         </section>
+        
+        <!-- Additional ad placement -->
+        <div class="ad-container">
+          <div class="ad-label">Advertisement</div>
+          <div>
+            <script type="text/javascript">
+              atOptions = {
+                'key' : '27500133',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+              };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/27500133/invoke.js"></script>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -240,8 +454,18 @@
           <li>Export your gradients as PNG, JPG, or SVG files</li>
           <li>Save your favorite gradients for later use</li>
           <li>Generate random gradients for inspiration</li>
+          <li>Use popular color palettes with one click</li>
+          <li>Share your creations on social media</li>
         </ul>
         <p>Whether you're a professional designer or just starting out, our gradient generator makes it easy to create stunning visual elements for your projects.</p>
+        
+        <h3>How to Use</h3>
+        <ol>
+          <li>Select your desired colors using the color pickers</li>
+          <li>Adjust the angle slider to change gradient direction</li>
+          <li>Copy the CSS code or export as an image</li>
+          <li>Save your favorite gradients for later use</li>
+        </ol>
       </div>
     </div>
 
@@ -249,7 +473,7 @@
     <div id="privacy" class="page-content">
       <div class="card content-card">
         <h2>Privacy Policy</h2>
-        <p>Last updated: March 2023</p>
+        <p>Last updated: September 2023</p>
         <p>At CSS Gradient Generator, we take your privacy seriously. This Privacy Policy describes how we collect, use, and share your personal information.</p>
         
         <h3>Information We Collect</h3>
@@ -268,7 +492,10 @@
         </ul>
         
         <h3>Data Storage</h3>
-        <p>Your saved gradients are stored locally in your browser and are not transmitted to our servers.</p>
+        <p>Your saved gradients are stored locally in your browser and are not transmitted to our servers. We do not have access to your saved gradients.</p>
+        
+        <h3>Third-Party Services</h3>
+        <p>We use third-party advertising companies to serve ads when you visit our website. These companies may use information about your visits to this and other websites to provide advertisements about goods and services of interest to you.</p>
         
         <h3>Contact Us</h3>
         <p>If you have any questions about this Privacy Policy, please contact us at zayyansensetech@gmail.com.</p>
@@ -279,7 +506,7 @@
     <div id="terms" class="page-content">
       <div class="card content-card">
         <h2>Terms of Service</h2>
-        <p>Last updated: March 2023</p>
+        <p>Last updated: September 2023</p>
         
         <h3>1. Acceptance of Terms</h3>
         <p>By accessing and using CSS Gradient Generator, you accept and agree to be bound by the terms and provision of this agreement.</p>
@@ -298,26 +525,6 @@
         
         <h3>6. Changes to Terms</h3>
         <p>We may revise these terms of service at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
-      </div>
-    </div>
-
-    <!-- Disclaimer Page -->
-    <div id="disclaimer" class="page-content">
-      <div class="card content-card">
-        <h2>Disclaimer</h2>
-        <p>Last updated: March 2023</p>
-        
-        <h3>No Warranty</h3>
-        <p>The information provided by CSS Gradient Generator ("we," "us," or "our") on https://yourwebsite.com (the "Site") is for general informational purposes only. All information on the Site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site.</p>
-        
-        <h3>External Links Disclaimer</h3>
-        <p>The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or originating from third parties. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us.</p>
-        
-        <h3>Professional Disclaimer</h3>
-        <p>The Site cannot and does not contain design advice. The design information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. We do not provide any kind of design advice.</p>
-        
-        <h3>Contact Us</h3>
-        <p>If you have any questions about this Disclaimer, You can contact us at zayyansensetech@gmail.com.</p>
       </div>
     </div>
 
@@ -364,13 +571,21 @@
           <p>You haven't saved any gradients yet.</p>
           <p>Go to the Home page to create and save gradients.</p>
         </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+          <button id="clearAllBtn" class="btn ghost">Clear All Saved Gradients</button>
+        </div>
       </div>
     </div>
 
-    <footer>© 2025 CSS Gradient Generator</footer>
+    <footer>© 2023 CSS Gradient Generator | <a href="#" data-page="privacy">Privacy Policy</a> | <a href="#" data-page="terms">Terms of Service</a> | <a href="#" data-page="contact">Contact</a></footer>
   </main>
 
+  <!-- Toast notification element -->
+  <div id="toast" class="toast"></div>
+
   <script>
+    // DOM Elements
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggleBtn');
     const themeToggle = document.getElementById('themeToggle');
@@ -396,6 +611,8 @@
     const navLinks = document.querySelectorAll('.nav a');
     const loading = document.getElementById('loading');
     const currentPage = document.getElementById('current-page');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const angleLine = document.getElementById('angleLine');
 
     // Page titles and subtitles
     const pageInfo = {
@@ -414,10 +631,6 @@
       terms: {
         title: "Terms of Service",
         subtitle: "Terms and conditions for using our service"
-      },
-      disclaimer: {
-        title: "Disclaimer",
-        subtitle: "Important legal information"
       },
       contact: {
         title: "Contact Us",
@@ -472,8 +685,56 @@
       if (window.innerWidth < 1100) {
         sidebar.classList.remove('open');
       }
+      
+      // Update URL hash
+      window.location.hash = page;
     }
 
+    // Additional functionality
+    function applyPalette(color1Hex, color2Hex) {
+      color1.value = color1Hex;
+      color2.value = color2Hex;
+      updateGradient();
+      showToast('Color palette applied!');
+    }
+    
+    function shareOnTwitter() {
+      const text = "Check out this cool gradient I made with CSS Gradient Generator!";
+      const url = window.location.href;
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+    }
+    
+    function shareOnFacebook() {
+      const url = window.location.href;
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+    }
+    
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('Link copied to clipboard!');
+    }
+    
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Update gradient function with angle indicator
+    function updateGradient() {
+      const gradient = `linear-gradient(${angle.value}deg, ${color1.value}, ${color2.value})`;
+      preview.style.background = gradient;
+      cssCode.value = `background: ${gradient};`;
+      
+      // Update angle indicator
+      angleLine.style.transform = `rotate(${angle.value}deg)`;
+      document.getElementById('angleValue').textContent = angle.value;
+    }
+    
     // Load saved gradients
     function loadSavedGradients() {
       const saved = JSON.parse(localStorage.getItem("gradients") || "[]");
@@ -481,23 +742,25 @@
       
       if (saved.length === 0) {
         noSaved.style.display = 'block';
+        if (clearAllBtn) clearAllBtn.style.display = 'none';
         return;
       }
       
       noSaved.style.display = 'none';
+      if (clearAllBtn) clearAllBtn.style.display = 'block';
       
       saved.forEach((gradient, index) => {
         // Extract colors from gradient CSS
         const colorsMatch = gradient.match(/linear-gradient\(.*?,\s*(.*?),\s*(.*?)\)/);
         if (colorsMatch) {
-          const color1 = colorsMatch[1];
-          const color2 = colorsMatch[2];
+          const color1Val = colorsMatch[1];
+          const color2Val = colorsMatch[2];
           
           const item = document.createElement('div');
           item.className = 'saved-item';
           item.style.background = gradient;
           item.title = gradient;
-          item.setAttribute('aria-label', `Saved gradient with colors ${color1} and ${color2}`);
+          item.setAttribute('aria-label', `Saved gradient with colors ${color1Val} and ${color2Val}`);
           
           const deleteBtn = document.createElement('button');
           deleteBtn.className = 'delete';
@@ -528,6 +791,7 @@
         color2.value = colorsMatch[2];
         updateGradient();
         navigateTo('home');
+        showToast('Gradient applied!');
       }
     }
     
@@ -537,13 +801,16 @@
       saved.splice(index, 1);
       localStorage.setItem("gradients", JSON.stringify(saved));
       loadSavedGradients();
+      showToast('Gradient deleted!');
     }
-
-    // Update gradient preview and CSS code
-    function updateGradient() {
-      const gradient = `linear-gradient(${angle.value}deg, ${color1.value}, ${color2.value})`;
-      preview.style.background = gradient;
-      cssCode.value = `background: ${gradient};`;
+    
+    // Clear all saved gradients
+    function clearAllGradients() {
+      if (confirm("Are you sure you want to delete all saved gradients?")) {
+        localStorage.removeItem("gradients");
+        loadSavedGradients();
+        showToast('All gradients deleted!');
+      }
     }
 
     // Generate random color
@@ -557,6 +824,7 @@
       color2.value = randomColor();
       angle.value = Math.floor(Math.random()*361);
       updateGradient();
+      showToast('Random gradient generated!');
     }
 
     // Reverse gradient colors
@@ -565,13 +833,14 @@
       color1.value = color2.value;
       color2.value = temp;
       updateGradient();
+      showToast('Colors reversed!');
     }
 
     // Copy CSS to clipboard
     function copyCSS() {
       cssCode.select();
       document.execCommand("copy");
-      alert("CSS copied to clipboard!");
+      showToast("CSS copied to clipboard!");
     }
 
     // Save gradient to localStorage
@@ -579,7 +848,7 @@
       const saved = JSON.parse(localStorage.getItem("gradients") || "[]");
       saved.push(cssCode.value);
       localStorage.setItem("gradients", JSON.stringify(saved));
-      alert("Gradient saved to your collection!");
+      showToast("Gradient saved to your collection!");
     }
 
     // Download gradient as image
@@ -596,6 +865,7 @@
       link.download = `gradient.${type}`;
       link.href = canvas.toDataURL("image/"+type);
       link.click();
+      showToast(`Downloading ${type.toUpperCase()} image!`);
     }
 
     // Send contact message (placeholder function)
@@ -605,12 +875,12 @@
       const message = document.getElementById('message').value;
       
       if (!name || !email || !message) {
-        alert('Please fill in all fields');
+        showToast('Please fill in all fields');
         return;
       }
       
       // In a real implementation, you would send this data to a server
-      alert('Thank you for your message! We\'ll get back to you soon.');
+      showToast('Thank you for your message! We\'ll get back to you soon.');
       
       // Clear form
       document.getElementById('name').value = '';
@@ -620,7 +890,10 @@
 
     // Event listeners
     toggleBtn.addEventListener("click", () => sidebar.classList.toggle("open"));
-    themeToggle.addEventListener("click", () => document.body.classList.toggle("light"));
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      showToast(`Theme changed to ${document.body.classList.contains('light') ? 'light' : 'dark'} mode`);
+    });
     color1.addEventListener("input", updateGradient);
     color2.addEventListener("input", updateGradient);
     angle.addEventListener("input", updateGradient);
@@ -639,7 +912,22 @@
       link.href = URL.createObjectURL(blob);
       link.download = "gradient.svg";
       link.click();
+      showToast('Downloading SVG!');
     });
+    
+    // Swap colors button
+    document.getElementById('swapColors').addEventListener('click', function() {
+      const temp = color1.value;
+      color1.value = color2.value;
+      color2.value = temp;
+      updateGradient();
+      showToast('Colors swapped!');
+    });
+    
+    // Clear all button
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', clearAllGradients);
+    }
     
     sendMessage.addEventListener("click", sendContactMessage);
     
@@ -652,6 +940,15 @@
       });
     });
     
+    // Footer link listeners
+    document.querySelectorAll('footer a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('href').replace('#', '');
+        navigateTo(page);
+      });
+    });
+    
     // Breadcrumb navigation
     document.querySelector('.breadcrumb a').addEventListener('click', (e) => {
       e.preventDefault();
@@ -660,6 +957,22 @@
 
     // Initialize
     updateGradient();
+    
+    // Check if there's a hash in the URL and navigate to that page
+    if (window.location.hash) {
+      const page = window.location.hash.replace('#', '');
+      if (pageInfo[page]) {
+        navigateTo(page);
+      }
+    }
+    
+    // Close sidebar when clicking outside of it
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth < 1100 && sidebar.classList.contains('open') && 
+          !sidebar.contains(e.target) && e.target !== toggleBtn) {
+        sidebar.classList.remove('open');
+      }
+    });
   </script>
 </body>
 </html>
